@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#183d35">
+  <title>19.11 — Khu vườn gửi anh</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f5f7ea;
+      --muted: #d3e0cf;
+      --rose: #f0a0a5;
+      --deep: #183d35;
+      --serif: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      min-height: 100vh;
+      color: var(--ink);
+      background: #241321;
+    }
+
+    button { font: inherit; }
+
+    .experience {
+      position: relative;
+      isolation: isolate;
+      display: flex;
+      min-height: 100svh;
+      flex-direction: column;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 30%, #a34a62 0, #69334e 27%, transparent 60%),
+        linear-gradient(180deg, #271d35 0%, #63324d 53%, #291926 100%);
+    }
+
+    .sky-glow {
+      position: absolute;
+      z-index: -1;
+      top: 10%;
+      left: 50%;
+      width: min(60vw, 700px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, #f8b4a75c 0, #e8809b25 38%, transparent 70%);
+      transform: translateX(-50%);
+      filter: blur(8px);
+    }
+
+    .topbar {
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 26px clamp(20px, 5vw, 72px);
+      color: #f9e8e5;
+      font-size: 11px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand-mark { color: #f29aae; font-size: 18px; }
+    .date-label { color: #e8bec7; }
+
+    .intro {
+      z-index: 2;
+      padding: clamp(5px, 2vh, 24px) 20px 0;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: #f4c3c6;
+      font-size: 11px;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(39px, 7vw, 82px);
+      font-weight: 400;
+      line-height: .98;
+      text-shadow: 0 4px 35px #32162880;
+    }
+
+    h1 em { color: #ffc1c8; font-weight: 400; }
+    .subtitle { margin: 15px 0 0; color: #f2d8d8; font-family: var(--serif); font-size: clamp(14px, 2vw, 18px); font-style: italic; }
+
+    .garden {
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .hills {
+      position: absolute;
+      right: -10%;
+      bottom: 17%;
+      left: -10%;
+      height: 34%;
+      border-radius: 50% 50% 0 0 / 25% 25% 0 0;
+      background: linear-gradient(180deg, #523047 0%, #38243a 80%);
+      box-shadow: 0 -18px 55px #3b21364d;
+    }
+
+    .hills.back {
+      right: 35%;
+      bottom: 25%;
+      left: -25%;
+      height: 24%;
+      background: linear-gradient(180deg, #74405a 0%, #4a2d49 100%);
+      opacity: .76;
+    }
+
+    .path {
+      position: absolute;
+      bottom: -19%;
+      left: 50%;
+      width: min(48vw, 600px);
+      height: 60%;
+      border-radius: 50% 50% 0 0;
+      background: linear-gradient(90deg, #b27b7b 0%, #e0a39a 48%, #b4777a 100%);
+      clip-path: polygon(43% 0, 57% 0, 100% 100%, 0 100%);
+      opacity: .74;
+      transform: translateX(-50%);
+    }
+
+    .path::after {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #502b46aa, transparent 48%, #502b46aa);
+      content: "";
+    }
+
+    .rose-field {
+      position: absolute;
+      right: -5%;
+      bottom: 9%;
+      left: -5%;
+      height: 43%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='104' height='122' viewBox='0 0 104 122'%3E%3Cpath d='M50 122V53' stroke='%233e5d45' stroke-width='4'/%3E%3Cpath d='M49 85q-20-20-29-7 11 18 29 15m3-30q20-22 31-10-10 19-30 20' fill='%235f8056'/%3E%3Cg transform='translate(50 42)'%3E%3Ccircle r='13' fill='%23c44c70'/%3E%3Ccircle r='9' fill='%23ed7890'/%3E%3Ccircle r='5' fill='%23f8abb0'/%3E%3Ccircle r='2' fill='%23ffe0cb'/%3E%3Cpath d='M-9-8q-8-12-1-16 8-1 10 8m8 1q8-11 13-6 2 7-7 12' fill='%23df6480'/%3E%3C/g%3E%3C/svg%3E");
+      background-position: 0 0, 34px 25px, 70px 10px;
+      background-size: 104px 122px, 130px 150px, 92px 108px;
+      mask-image: linear-gradient(90deg, #000 0%, transparent 37%, transparent 63%, #000 100%);
+      opacity: .78;
+    }
+
+    .rose-field.near {
+      bottom: -4%;
+      height: 35%;
+      background-size: 150px 176px, 170px 198px, 120px 140px;
+      filter: saturate(1.15);
+      mask-image: linear-gradient(90deg, #000, transparent 45%, transparent 55%, #000);
+      opacity: .95;
+    }
+
+    .girl {
+      position: absolute;
+      z-index: 1;
+      bottom: 17%;
+      left: 50%;
+      width: clamp(105px, 15vw, 175px);
+      overflow: visible;
+      filter: drop-shadow(0 12px 20px #21111e80);
+      transform: translateX(-50%);
+      animation: stroll 2.8s ease-in-out infinite;
+    }
+
+    .girl .leg-left { transform-box: fill-box; transform-origin: 50% 0; animation: step-a .72s ease-in-out infinite alternate; }
+    .girl .leg-right { transform-box: fill-box; transform-origin: 50% 0; animation: step-b .72s ease-in-out infinite alternate; }
+    .girl .arm { transform-box: fill-box; transform-origin: 50% 10%; animation: swing .72s ease-in-out infinite alternate; }
+
+    @keyframes stroll { 0%, 100% { margin-bottom: 0; } 50% { margin-bottom: 5px; } }
+    @keyframes step-a { to { transform: rotate(12deg); } }
+    @keyframes step-b { to { transform: rotate(-12deg); } }
+    @keyframes swing { to { transform: rotate(-9deg); } }
+
+    .petal {
+      position: absolute;
+      z-index: 2;
+      top: -8%;
+      width: 12px;
+      height: 17px;
+      border-radius: 90% 10% 80% 20%;
+      background: linear-gradient(135deg, #ffd1cf, #dd6385);
+      opacity: .78;
+      animation: drift var(--duration) linear infinite;
+      animation-delay: var(--delay);
+      pointer-events: none;
+    }
+
+    @keyframes drift {
+      0% { transform: translate3d(0, -5vh, 0) rotate(0deg); }
+      50% { transform: translate3d(70px, 54vh, 0) rotate(240deg); }
+      100% { transform: translate3d(-28px, 112vh, 0) rotate(520deg); }
+    }
+
+    .cards-section {
+      position: relative;
+      z-index: 3;
+      width: min(100%, 1050px);
+      margin: auto auto 0;
+      padding: 0 22px clamp(23px, 4vh, 42px);
+    }
+
+    .cards-heading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 13px;
+      margin-bottom: 14px;
+      color: #f5d9db;
+      font-size: 10px;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+    }
+
+    .cards-heading::before, .cards-heading::after { width: 34px; height: 1px; background: #f0b3bd88; content: ""; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: clamp(8px, 1.6vw, 16px);
+    }
+
+    .card {
+      position: relative;
+      min-height: 112px;
+      padding: 15px 12px 13px;
+      overflow: hidden;
+      border: 1px solid #f8d7d53b;
+      border-radius: 4px 16px 4px 16px;
+      color: var(--ink);
+      text-align: left;
+      background: linear-gradient(145deg, #f8d7d519, #301b2cba);
+      box-shadow: 0 10px 30px #1e10265c;
+      backdrop-filter: blur(12px);
+      cursor: pointer;
+      transition: transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+
+    .card:hover, .card:focus-visible {
+      border-color: #ffc2c9;
+      outline: none;
+      background: linear-gradient(145deg, #f8d7d537, #301b2ce8);
+      transform: translateY(-7px);
+    }
+
+    .card-number { display: block; margin-bottom: 8px; color: #f3a5b2; font-family: var(--serif); font-size: 13px; font-style: italic; }
+    .card-title { display: block; font-family: var(--serif); font-size: clamp(13px, 1.6vw, 17px); }
+    .card-hint { display: block; margin-top: 6px; color: #d7bec8; font-size: 10px; }
+    .card::after { position: absolute; right: 9px; bottom: 6px; color: #ffc1c7; content: "✧"; opacity: .8; }
+
+    .footer-note {
+      margin: 14px 0 0;
+      color: #e8cfd3;
+      font-family: var(--serif);
+      font-size: 12px;
+      font-style: italic;
+      text-align: center;
+    }
+
+    .modal {
+      position: fixed;
+      z-index: 10;
+      inset: 0;
+      display: grid;
+      padding: 20px;
+      place-items: center;
+      background: #160e1bc9;
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+
+    .modal[hidden] { display: none; }
+    .modal.open { opacity: 1; }
+
+    .letter {
+      position: relative;
+      width: min(100%, 460px);
+      padding: clamp(30px, 7vw, 55px);
+      border: 1px solid #d990a27a;
+      border-radius: 3px 28px 3px 28px;
+      color: #49283b;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at top right, #f7d8d4, transparent 65%),
+        #fff4e9;
+      box-shadow: 0 25px 90px #130a1a99;
+      transform: translateY(12px) scale(.98);
+      transition: transform .25s ease;
+    }
+
+    .modal.open .letter { transform: translateY(0) scale(1); }
+    .letter-date { color: #b66379; font-size: 10px; letter-spacing: .25em; text-transform: uppercase; }
+    .letter h2 { margin: 16px 0 14px; color: #693149; font-family: var(--serif); font-size: 34px; font-weight: 400; }
+    .letter p { margin: 0; color: #68485a; font-family: var(--serif); font-size: 17px; line-height: 1.75; }
+    .letter-heart { display: block; margin-top: 23px; color: #d66b83; font-size: 21px; }
+    .close {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 50%;
+      color: #75445a;
+      background: #6b3a4b12;
+      cursor: pointer;
+    }
+    .close:hover { background: #6b3a4b24; }
+
+    .experience {
+      background:
+        radial-gradient(ellipse at 50% 28%, #a5c68e 0, #628d68 24%, transparent 58%),
+        linear-gradient(180deg, #274b48 0%, #456e55 52%, #142d29 100%);
+    }
+
+    .sky-glow {
+      background: radial-gradient(circle, #e4efb866 0, #bdde9428 40%, transparent 72%);
+    }
+
+    .topbar { color: #eff5e6; }
+    .brand-mark, .card-number { color: #ffb4b1; }
+    .date-label, .eyebrow { color: #d9e8c9; }
+    h1 { font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif; }
+    h1 em { color: #e8f0bd; }
+    .subtitle { color: #f1f3df; }
+
+    .garden::before {
+      position: absolute;
+      inset: 0 0 35%;
+      background:
+        radial-gradient(ellipse at 0% 10%, #193c32 0 12%, transparent 31%),
+        radial-gradient(ellipse at 100% 8%, #193c32 0 13%, transparent 32%),
+        radial-gradient(ellipse at 14% 30%, #315840 0 5%, transparent 24%),
+        radial-gradient(ellipse at 88% 28%, #315840 0 6%, transparent 25%),
+        linear-gradient(90deg, transparent 4%, #183a3477 4.5% 5.3%, transparent 5.8% 17%, #21453688 17.5% 18.5%, transparent 19% 34%, #20413577 34.5% 35.5%, transparent 36% 63%, #20413577 63.5% 64.5%, transparent 65% 81%, #21453688 81.5% 82.5%, transparent 83% 94%, #183a3477 94.5% 95.3%, transparent 96%),
+        linear-gradient(180deg, #1d383d44, transparent 80%);
+      content: "";
+      mask-image: linear-gradient(90deg, #000, transparent 22%, transparent 78%, #000);
+    }
+
+    .hills {
+      background: linear-gradient(180deg, #365d48 0%, #203e35 80%);
+      box-shadow: 0 -18px 55px #183a344d;
+    }
+
+    .hills.back { background: linear-gradient(180deg, #66805a 0%, #3b6048 100%); }
+    .path { background: linear-gradient(90deg, #839276 0%, #c3bd91 48%, #839276 100%); }
+    .path::after { background: linear-gradient(90deg, #284b3aaa, transparent 48%, #284b3aaa); }
+
+    .rose-field {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='104' height='122' viewBox='0 0 104 122'%3E%3Cpath d='M50 122V53' stroke='%232d563c' stroke-width='4'/%3E%3Cpath d='M49 85q-20-20-29-7 11 18 29 15m3-30q20-22 31-10-10 19-30 20' fill='%23597847'/%3E%3Cg transform='translate(50 42)'%3E%3Ccircle r='13' fill='%23c44c70'/%3E%3Ccircle r='9' fill='%23ed7890'/%3E%3Ccircle r='5' fill='%23f8abb0'/%3E%3Ccircle r='2' fill='%23ffe0cb'/%3E%3Cpath d='M-9-8q-8-12-1-16 8-1 10 8m8 1q8-11 13-6 2 7-7 12' fill='%23df6480'/%3E%3C/g%3E%3C/svg%3E");
+      opacity: .9;
+    }
+
+    .girl {
+      left: var(--girl-x, 50%);
+      bottom: 23%;
+      transition: left .24s ease-out;
+      filter: drop-shadow(0 12px 20px #12241d80);
+      animation: none;
+    }
+
+    .girl .leg-left, .girl .leg-right, .girl .arm { animation: none; }
+    .girl.is-walking { animation: stroll .55s ease-in-out infinite; }
+    .girl.is-walking .leg-left { animation: step-a .34s ease-in-out infinite alternate; }
+    .girl.is-walking .leg-right { animation: step-b .34s ease-in-out infinite alternate; }
+    .girl.is-walking .arm { animation: swing .34s ease-in-out infinite alternate; }
+    .girl.facing-left { transform: translateX(-50%) scaleX(-1); }
+    .girl.facing-right { transform: translateX(-50%) scaleX(1); }
+
+    .petal { background: linear-gradient(135deg, #fff0d6, #e8869a); }
+
+    .cards-section { width: min(100%, 1120px); }
+    .cards-heading { color: #f2f1d8; }
+    .cards-heading::before, .cards-heading::after { background: #e3eccb88; }
+
+    .card {
+      border-color: #e5efd04a;
+      border-radius: 16px 5px 16px 5px;
+      background: linear-gradient(145deg, #f8ffe01f, #183d35d9);
+      box-shadow: 0 10px 30px #10281f66;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    }
+
+    .card:hover, .card:focus-visible {
+      border-color: #d6e8aa;
+      background: linear-gradient(145deg, #eff4d838, #183d35ed);
+    }
+
+    .card-title { font-family: "Trebuchet MS", "Segoe UI", sans-serif; font-size: 15px; }
+    .card-hint { color: #d1e0cf; }
+    .card::after { color: #f2b0ad; }
+    .footer-note { color: #edf0d9; font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif; }
+    .card-status { min-height: 16px; margin: 8px 0 0; color: #ffe0aa; font-size: 12px; text-align: center; }
+
+    .modal { background: #10251fd9; }
+    .letter {
+      border-color: #b7c98e;
+      border-radius: 18px 4px 18px 4px;
+      color: #294337;
+      text-align: left;
+      background: radial-gradient(ellipse at top right, #f1edd3, transparent 65%), #fffdf0;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    }
+
+    .letter-date { color: #657f51; }
+    .letter h2 { color: #315742; font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif; }
+    .letter label { display: block; margin: 17px 0 7px; color: #46634b; font-size: 13px; font-weight: 700; }
+    .letter input, .letter textarea {
+      display: block;
+      width: 100%;
+      border: 1px solid #c5d0aa;
+      border-radius: 8px;
+      padding: 11px 12px;
+      color: #294337;
+      background: #ffffffc9;
+      font: inherit;
+    }
+
+    .letter textarea { min-height: 140px; resize: vertical; line-height: 1.6; }
+    .letter input:focus, .letter textarea:focus { border-color: #668358; outline: 2px solid #a9bf894d; }
+    .letter-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+    .letter-actions button { border: 1px solid #688357; border-radius: 999px; padding: 10px 18px; color: #315742; background: transparent; cursor: pointer; }
+    .letter-actions button[type="submit"] { color: #fffdf0; background: #466b4d; }
+    .letter-actions button:hover { filter: brightness(1.08); }
+    .close { color: #426248; background: #6b3a4b12; }
+    .letter-status { min-height: 18px; margin: 8px 0 0; color: #9c3e43; font-size: 12px; }
+    .movement-hint { position: absolute; z-index: 3; top: 52%; left: 50%; color: #f3f1dfd9; font-size: 11px; letter-spacing: .12em; text-shadow: 0 1px 5px #1c332d; transform: translateX(-50%); pointer-events: none; }
+
+    @media (max-width: 650px) {
+      .topbar { padding-top: 18px; }
+      .intro { padding-top: 4vh; }
+      .subtitle { margin-top: 9px; }
+      .girl { bottom: 24%; width: 125px; }
+      .hills { bottom: 23%; height: 27%; }
+      .hills.back { bottom: 30%; }
+      .path { bottom: -14%; width: 76vw; height: 47%; }
+      .rose-field { bottom: 14%; height: 34%; }
+      .rose-field.near { bottom: 0; height: 24%; }
+      .cards-section { padding: 0 14px 18px; }
+      .cards { grid-template-columns: repeat(5, minmax(92px, 1fr)); gap: 8px; overflow-x: auto; padding: 2px 2px 10px; scrollbar-width: thin; }
+      .card { min-height: 100px; padding: 12px 9px; }
+      .card-title { font-size: 14px; }
+      .card-hint { font-size: 9px; }
+      .footer-note { margin-top: 6px; font-size: 11px; }
+    }
+
+    @media (max-width: 650px) {
+      .girl { bottom: 29%; width: 125px; }
+      .movement-hint { top: 55%; width: 90%; text-align: center; font-size: 10px; }
+      .letter-actions button { padding: 10px 14px; }
+    }
+
+    @media (hover: none) {
+      .movement-hint::after { content: " hoặc chạm vào vườn"; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="experience">
+    <div class="sky-glow" aria-hidden="true"></div>
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">✿</span><span>Khu vườn của chúng mình</span></div>
+      <div class="date-label">19 · 11</div>
+    </header>
+
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">Một món quà nhỏ dành tặng anh</p>
+      <h1 id="page-title">Gửi anh <em>ngày 19.11</em></h1>
+      <p class="subtitle">Một góc vườn xanh, năm tấm thiệp và những điều em muốn tự tay viết.</p>
+    </section>
+
+    <div class="garden" aria-hidden="true">
+      <div class="hills back"></div>
+      <div class="hills"></div>
+      <div class="path"></div>
+      <div class="rose-field"></div>
+      <div class="rose-field near"></div>
+      <svg class="girl" viewBox="0 0 180 350" role="img" aria-label="Cô gái đang bước đi trong vườn hoa">
+        <defs>
+          <linearGradient id="dress" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0" stop-color="#e8e8c0"/>
+            <stop offset="1" stop-color="#91ad85"/>
+          </linearGradient>
+          <linearGradient id="hair" x1="0" x2="1">
+            <stop stop-color="#38202e"/>
+            <stop offset="1" stop-color="#704051"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="92" cy="340" rx="45" ry="8" fill="#261523" opacity=".3"/>
+        <g class="leg-left">
+          <path d="M75 253q-4 35-2 64l-1 9q8 6 17 1l8-70z" fill="#f0bdad"/>
+          <path d="M72 322q-11 7-11 15 13 5 31-2l1-8q-8 3-21-5z" fill="#593142"/>
+        </g>
+        <g class="leg-right">
+          <path d="M105 253q12 33 12 61l7 11q-5 8-15 5l-18-62z" fill="#eab19f"/>
+          <path d="M118 321q12 5 18 14-7 8-28-1l-4-7q8 2 14-6z" fill="#593142"/>
+        </g>
+        <path d="M73 135q-7 16-8 50l-5 75q30 20 74 1l-7-78q-3-31-16-47z" fill="url(#dress)"/>
+        <path d="M72 244q27 10 62 0l3 18q-29 17-70-1z" fill="#e8e8c0"/>
+        <path d="M71 145q-18 17-26 52l-12 40q1 10 10 8l29-48 12-36z" fill="#efb6a6"/>
+        <g class="arm">
+          <path d="M116 145q17 7 23 25l17 48q1 10-9 12l-27-48-18-20z" fill="#f0b7a7"/>
+          <path d="M151 226q5 3 7 11l-5 6q-8-2-9-11z" fill="#edb7a7"/>
+        </g>
+        <path d="M75 48q-7-21 7-31 16-13 39 0 17 10 16 32l-2 62q-4 27-25 34-28-8-34-34z" fill="url(#hair)"/>
+        <ellipse cx="99" cy="79" rx="30" ry="38" fill="#f3c4b0"/>
+        <path d="M69 68q-1-41 31-48 32-7 39 29-20-11-34-22-8 22-36 29z" fill="url(#hair)"/>
+        <path d="M69 59q-8 42 5 69l7-21-2-47zM126 45q18 26 6 73l-12-20 1-42z" fill="url(#hair)"/>
+        <path d="M85 81q5-4 10 0m13 0q5-4 10 0" fill="none" stroke="#573443" stroke-width="2" stroke-linecap="round"/>
+        <path d="M100 97q5 4 10 0" fill="none" stroke="#bd6f78" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="87" cy="91" r="4" fill="#e79591" opacity=".5"/>
+        <circle cx="116" cy="91" r="4" fill="#e79591" opacity=".5"/>
+        <path d="M71 143q19 15 42 1l8 13q-27 21-57 0z" fill="#fff0e8" opacity=".8"/>
+        <path d="M47 246q-7 4-9 13" fill="none" stroke="#ba7c70" stroke-width="2"/>
+        <g transform="translate(36 245)">
+          <path d="M0 10q-8 10-6 22" fill="none" stroke="#678052" stroke-width="2"/>
+          <circle cx="-2" cy="6" r="5" fill="#e68a9c"/>
+          <circle cx="-2" cy="6" r="2" fill="#ffe2c4"/>
+          <path d="M-5 15q-11-7-12 0 7 5 13 3m2 2q10-8 13-2-6 7-13 7" fill="#789360"/>
+        </g>
+        <path d="M85 125q13 6 25-1" fill="none" stroke="#d88a83" stroke-width="2" opacity=".6"/>
+      </svg>
+    </div>
+    <p class="movement-hint">Di chuyển chuột để cô gái dạo bước trong vườn</p>
+
+    <section class="cards-section" aria-label="Năm tấm thiệp ngày 19 tháng 11">
+      <div class="cards-heading">Chọn một tấm thiệp để tự viết lời nhắn</div>
+      <div class="cards" id="cards"></div>
+      <p class="card-status" id="card-status" role="status" aria-live="polite"></p>
+      <p class="footer-note">Lời nhắn của em, gửi đến người đặc biệt.</p>
+    </section>
+  </main>
+
+  <div class="modal" id="modal" hidden>
+    <form class="letter" id="letter-form" role="dialog" aria-modal="true" aria-labelledby="letter-heading">
+      <button class="close" type="button" aria-label="Đóng thiệp">×</button>
+      <div class="letter-date">19 tháng 11 · Gửi anh</div>
+      <h2 id="letter-heading">Tấm thiệp của em</h2>
+      <label for="letter-title">Tiêu đề thiệp</label>
+      <input id="letter-title" name="title" maxlength="60" placeholder="Viết tiêu đề em muốn..." autocomplete="off">
+      <label for="letter-message">Lời nhắn của em</label>
+      <textarea id="letter-message" name="message" maxlength="1000" placeholder="Viết điều em muốn gửi đến anh..." rows="6"></textarea>
+      <p class="letter-status" id="letter-status" role="status" aria-live="polite"></p>
+      <div class="letter-actions">
+        <button class="discard" type="button">Đóng</button>
+        <button type="submit">Lưu thiệp</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const storageKey = "rose-garden-cards-19-11";
+    const blankCard = () => ({ title: "", message: "" });
+    const savedCards = Array.from({ length: 5 }, blankCard);
+    const cards = document.querySelector("#cards");
+    const modal = document.querySelector("#modal");
+    const form = document.querySelector("#letter-form");
+    const titleInput = document.querySelector("#letter-title");
+    const messageInput = document.querySelector("#letter-message");
+    const closeButton = document.querySelector(".close");
+    const discardButton = document.querySelector(".discard");
+    const letterStatus = document.querySelector("#letter-status");
+    const cardStatus = document.querySelector("#card-status");
+    const girl = document.querySelector(".girl");
+    let activeCardIndex = -1;
+    let lastOpenedCard = null;
+    let walkingTimer;
+
+    try {
+      const stored = localStorage.getItem(storageKey);
+      if (stored !== null) {
+        const parsed = JSON.parse(stored);
+        if (!Array.isArray(parsed) || parsed.length !== savedCards.length ||
+            parsed.some(card => !card || typeof card.title !== "string" || typeof card.message !== "string")) {
+          throw new Error("Dữ liệu thiệp không đúng định dạng.");
+        }
+        parsed.forEach((card, index) => {
+          savedCards[index] = { title: card.title, message: card.message };
+        });
+      }
+    } catch (error) {
+      cardStatus.textContent = "Không đọc được thiệp đã lưu. Bạn vẫn có thể viết và lưu trong phiên này.";
+    }
+
+    function updateCard(button, index) {
+      const item = savedCards[index];
+      button.querySelector(".card-title").textContent = item.title || `Tấm thiệp ${String(index + 1).padStart(2, "0")}`;
+      button.querySelector(".card-hint").textContent = item.title || item.message
+        ? "Đã có lời nhắn · Bấm để sửa"
+        : "Bấm để tự viết";
+      button.setAttribute("aria-label", `Mở tấm thiệp ${index + 1}${item.title ? `: ${item.title}` : " để tự viết"}`);
+    }
+
+    function openLetter(index, button) {
+      activeCardIndex = index;
+      lastOpenedCard = button;
+      titleInput.value = savedCards[index].title;
+      messageInput.value = savedCards[index].message;
+      letterStatus.textContent = "";
+      modal.hidden = false;
+      requestAnimationFrame(() => modal.classList.add("open"));
+      titleInput.focus();
+    }
+
+    for (let index = 0; index < savedCards.length; index += 1) {
+      const button = document.createElement("button");
+      button.className = "card";
+      button.type = "button";
+      button.innerHTML = `<span class="card-number">0${index + 1} / 05</span><span class="card-title"></span><span class="card-hint"></span>`;
+      updateCard(button, index);
+      button.addEventListener("click", () => openLetter(index, button));
+      cards.append(button);
+    }
+
+    function closeLetter() {
+      modal.classList.remove("open");
+      window.setTimeout(() => {
+        modal.hidden = true;
+        if (lastOpenedCard) lastOpenedCard.focus();
+      }, 250);
+    }
+
+    closeButton.addEventListener("click", closeLetter);
+    discardButton.addEventListener("click", closeLetter);
+    modal.addEventListener("click", event => {
+      if (event.target === modal) closeLetter();
+    });
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      if (activeCardIndex < 0) return;
+
+      const updatedCard = {
+        title: titleInput.value.trim(),
+        message: messageInput.value.trim()
+      };
+
+      savedCards[activeCardIndex] = updatedCard;
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(savedCards));
+        cardStatus.textContent = "Đã lưu thiệp trên trình duyệt này.";
+      } catch (error) {
+        cardStatus.textContent = "Không thể lưu vào trình duyệt; thiệp chỉ được giữ trong phiên này.";
+      }
+      updateCard(cards.children[activeCardIndex], activeCardIndex);
+      closeLetter();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && !modal.hidden) closeLetter();
+    });
+
+    document.querySelector(".experience").addEventListener("pointermove", event => {
+      if (event.target.closest(".cards-section, .topbar") || !modal.hidden) return;
+      const bounds = event.currentTarget.getBoundingClientRect();
+      const percent = Math.max(16, Math.min(84, ((event.clientX - bounds.left) / bounds.width) * 100));
+      const previous = Number.parseFloat(girl.style.getPropertyValue("--girl-x")) || 50;
+      girl.style.setProperty("--girl-x", `${percent}%`);
+      girl.classList.toggle("facing-left", percent < previous);
+      girl.classList.toggle("facing-right", percent >= previous);
+      girl.classList.add("is-walking");
+      window.clearTimeout(walkingTimer);
+      walkingTimer = window.setTimeout(() => girl.classList.remove("is-walking"), 420);
+    });
+
+    for (let index = 0; index < 15; index += 1) {
+      const petal = document.createElement("span");
+      petal.className = "petal";
+      petal.style.left = `${Math.random() * 100}%`;
+      petal.style.setProperty("--duration", `${9 + Math.random() * 12}s`);
+      petal.style.setProperty("--delay", `${-Math.random() * 18}s`);
+      petal.style.opacity = `${0.35 + Math.random() * 0.5}`;
+      document.querySelector(".experience").append(petal);
+    }
+  </script>
+</body>
+</html>
